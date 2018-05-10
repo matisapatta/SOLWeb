@@ -11,13 +11,14 @@ export class AppComponent {
   title = 'app';
   nombreSala: string = 'nombre default';
   nombreCrearSala: string;
-  sala = {};
+  sala: any = {};
 
   constructor(private http: HttpClient) {}
 
   guardarSala() {
     this.http.get('/api/sala/' + this.nombreSala).subscribe((sala) => {
-        this.sala = sala;
+      if (sala.err) alert('algo no anduvo bien');
+      this.sala = sala;
     })
   }
 
